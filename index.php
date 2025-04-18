@@ -7,7 +7,7 @@
     <style>
         body {
             margin: 0;
-            overflow: hidden;
+            font-family: Arial, sans-serif;
         }
         .background-image {
             position: fixed;
@@ -21,42 +21,45 @@
         .button-container {
             position: fixed;
             top: 50%;
-            right: 145px; /* Alinhado à direita com 145px de recuo */
-            transform: translateY(-50%); /* Centraliza verticalmente */
+            right: 145px;
+            transform: translateY(-50%);
             display: flex;
-            justify-content: flex-end; /* Alinha os botões à direita */
-            gap: 20px; /* Margem de 20px entre os botões */
+            justify-content: flex-end;
+            flex-wrap: nowrap;
+            gap: 20px;
             z-index: 1;
         }
         .image-button {
-            position: relative; /* Contém o ::before e o texto */
+            position: relative;
             cursor: pointer;
             transition: transform 0.2s;
-            overflow: hidden; /* Impede que o efeito de luz vaze */
+            overflow: hidden;
             border-radius: 5px;
-            width: 170px; /* Tamanho consistente para todos os botões */
+            width: 170px;
         }
         .image-button img {
             display: block;
             width: 100%;
-            height: auto; /* Mantém a proporção original da imagem */
-            filter: grayscale(100%); /* Imagem em preto e branco por padrão */
-            transition: filter 0.3s; /* Transição suave para colorido */
+            height: auto;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
             position: relative;
-            z-index: 1; /* Imagem abaixo do efeito de luz e texto */
+            z-index: 1;
         }
-        .image-button:hover img {
-            filter: grayscale(0%); /* Volta a ser colorida no hover */
+        .image-button:hover img,
+        .image-button:active img {
+            filter: grayscale(0%);
         }
-        .image-button:hover {
-            transform: scale(1.05); /* Efeito de zoom */
+        .image-button:hover,
+        .image-button:active {
+            transform: scale(1.05);
         }
         .image-button::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
-            width: 100%; /* Cobre todo o botão */
+            width: 100%;
             height: 100%;
             background: linear-gradient(
                 90deg,
@@ -64,11 +67,12 @@
                 rgba(255, 255, 255, 0.4),
                 transparent
             );
-            transition: left 0.5s; /* Transição suave para o efeito de luz */
-            z-index: 2; /* Efeito de luz acima da imagem */
+            transition: left 0.5s;
+            z-index: 2;
         }
-        .image-button:hover::before {
-            left: 100%; /* Efeito de luz passando */
+        .image-button:hover::before,
+        .image-button:active::before {
+            left: 100%;
         }
         .image-button span {
             position: absolute;
@@ -76,19 +80,20 @@
             font-size: 16px;
             font-weight: bold;
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente */
+            background-color: rgba(0, 0, 0, 0.6);
             padding: 5px 10px;
             border-radius: 3px;
-            opacity: 0; /* Oculto por padrão */
-            transition: opacity 0.3s; /* Transição suave para o texto */
-            z-index: 3; /* Texto acima da imagem e do efeito de luz */
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 3;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Sombra para destaque */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
-        .image-button:hover span {
-            opacity: 1; /* Texto aparece no hover */
+        .image-button:hover span,
+        .image-button:active span {
+            opacity: 1;
         }
         .social-icons {
             position: fixed;
@@ -105,7 +110,8 @@
             background-size: cover;
             transition: opacity 0.3s;
         }
-        .social-icons a:hover {
+        .social-icons a:hover,
+        .social-icons a:active {
             opacity: 0.8;
         }
         .facebook {
@@ -117,34 +123,39 @@
         .whatsapp {
             background-image: url('https://img.icons8.com/color/48/000000/whatsapp.png');
         }
-
         footer {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+            background-color: rgba(0, 0, 0, 0.7);
             color: white;
             padding: 10px 20px;
             display: flex;
-            justify-content: space-between; /* Texto à esquerda, links à direita */
+            justify-content: center;
             align-items: center;
-            z-index: 5; /* Acima da imagem de fundo */
+            z-index: 5;
             font-size: 14px;
+            text-align: center;
         }
         footer .copyright {
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Sombra para legibilidade */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            flex: 1;
+        }
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex: 1;
         }
         footer .footer-links a {
             color: white;
             text-decoration: none;
-            margin-left: 5px;
             transition: text-decoration 0.3s;
-            margin-right: 50px;
         }
-        footer .footer-links a:hover {
-            text-decoration: underline; /* Sublinhado no hover */
+        footer .footer-links a:hover,
+        footer .footer-links a:active {
+            text-decoration: underline;
         }
-
         #cookie-consent {
             position: fixed;
             bottom: 20px;
@@ -182,15 +193,117 @@
             background-color: #007bff;
             color: white;
         }
-        #cookie-consent #accept-cookies:hover {
+        #cookie-consent #accept-cookies:hover,
+        #cookie-consent #accept-cookies:active {
             background-color: #0056b3;
         }
         #cookie-consent #decline-cookies {
             background-color: #6c757d;
             color: white;
         }
-        #cookie-consent #decline-cookies:hover {
+        #cookie-consent #decline-cookies:hover,
+        #cookie-consent #decline-cookies:active {
             background-color: #5a6268;
+        }
+
+        /* Media Queries para responsividade */
+        @media screen and (max-width: 1024px) {
+            .button-container {
+                right: 0;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                gap: 10px;
+                top: 65%;
+                padding: 0 10px;
+            }
+            .image-button {
+                width: 150px;
+            }
+            .image-button span {
+                font-size: 12px;
+                padding: 3px 6px;
+            }
+            .social-icons {
+                top: 10px;
+                right: 10px;
+                gap: 10px;
+            }
+            .social-icons a {
+                width: 32px;
+                height: 32px;
+            }
+            footer {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            footer .copyright,
+            footer .footer-links {
+                text-align: center;
+            }
+            footer .footer-links {
+                gap: 10px;
+            }
+            #cookie-consent {
+                bottom: 80px;
+                max-width: 90%;
+                padding: 10px 15px;
+            }
+            #cookie-consent p {
+                font-size: 12px;
+            }
+            #cookie-consent button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .button-container {
+                top: 60%;
+                gap: 8px;
+                padding: 0 5px;
+            }
+            .image-button {
+                width: 80px;
+            }
+            .image-button span {
+                font-size: 10px;
+                padding: 2px 5px;
+            }
+            .social-icons {
+                top: 5px;
+                right: 5px;
+                gap: 8px;
+            }
+            .social-icons a {
+                width: 28px;
+                height: 28px;
+            }
+            footer {
+                flex-direction: column;
+                padding: 6px 10px;
+                font-size: 11px;
+            }
+            footer .copyright {
+                margin-bottom: 5px;
+            }
+            footer .footer-links {
+                flex-direction: row;
+                gap: 8px;
+            }
+            #cookie-consent {
+                bottom: 100px;
+                padding: 8px 10px;
+            }
+            #cookie-consent p {
+                font-size: 11px;
+            }
+            #cookie-consent button {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
         }
     </style>
 </head>
@@ -198,7 +311,13 @@
     <?php 
     $ano_atual = date('Y');
     ?>
-    <img src="images/home.png" alt="Imagem de fundo" class="background-image">
+    <picture>
+        <source media="(min-width: 1200px)" srcset="images/home.png">
+        <source media="(max-width: 1200px)" srcset="images/home3.png">
+        <source media="(max-width: 768px)" srcset="images/home2.png">
+        <img src="images/home2.png" alt="Descrição da imagem" class="background-image">
+    </picture> 
+    <!-- <img src="images/home.png" alt="Imagem de fundo" class="background-image"> -->
     <div class="button-container">
         <a href="https://www.eduk.skysee.com.br" target="_blank" class="image-button" id="btn1">
             <img src="images/escolar-btn.png" alt="Botão Escolar">
@@ -243,32 +362,27 @@
             const acceptCookies = document.getElementById('accept-cookies');
             const declineCookies = document.getElementById('decline-cookies');
 
-            // Verifica se o usuário já aceitou os cookies
             if (!localStorage.getItem('cookiesAccepted')) {
                 cookieConsent.classList.add('show');
             }
 
-            // Função para ocultar o pop-up
             const hideCookieConsent = () => {
                 cookieConsent.classList.remove('show');
                 setTimeout(() => {
                     cookieConsent.style.display = 'none';
-                }, 300); // Aguarda a transição de opacidade
+                }, 300);
             };
 
-            // Aceitar cookies
             acceptCookies.addEventListener('click', () => {
                 localStorage.setItem('cookiesAccepted', 'true');
                 hideCookieConsent();
             });
 
-            // Recusar cookies
             declineCookies.addEventListener('click', () => {
                 localStorage.setItem('cookiesAccepted', 'false');
                 hideCookieConsent();
             });
         });
     </script>
-    
 </body>
 </html>
