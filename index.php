@@ -314,9 +314,9 @@
     ?>
     <picture>
         <source media="(min-width: 1201px)" srcset="images/home.png">
-        <source media="(min-width: 769px) and (max-width: 1200px)" srcset="images/home3.png">
-        <source media="(max-width: 768px)" srcset="images/home2.png">
-        <img src="images/home2.png" alt="Descrição da imagem" class="background-image">
+        <source media="(min-width: 769px) and (max-width: 1200px)" srcset="images/Home3.png">
+        <source media="(max-width: 768px)" srcset="images/Home2.png">
+        <img src="images/Home2.png" alt="Descrição da imagem" class="background-image">
     </picture> 
     <!-- <img src="images/home.png" alt="Imagem de fundo" class="background-image"> -->
     <div class="button-container">
