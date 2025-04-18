@@ -1,112 +1,115 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKYSEE - Soluções de TI</title>
+    <title>Full Screen Image with Floating Buttons and Social Icons</title>
     <style>
-        * {
-            box-sizing: border-box; /* Ensures padding and borders are included in element's total width and height */
-        }
-
         body {
             margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh; /* Ensures the body takes at least the full viewport height */
-            background-color: #f4f4f4;
-            font-family: Arial, sans-serif;
+            overflow: hidden;
         }
-
-        .banner {
-            width: 80%; /* Use percentage for responsive width */
-            max-width: 600px; /* Maintain a max width for larger screens */
-            height: 200px;
-            margin: 20px 0;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: white;
-            font-size: 24px;
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .button {
+            position: fixed;
+            padding: 15px 30px;
+            font-size: 16px;
             font-weight: bold;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s;
-        }
-
-        .banner:hover {
-            transform: scale(1.05);
-        }
-
-        /* Tema Escolar para EDUK */
-        #eduk-banner {
-            background: linear-gradient(to right, #1e90ff, #87cefa);
-            background-image: url('images/eduk_banner.jpg'); /* Imagem de fundo escolar */
-            background-size: cover;
-            background-position: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Tema de Barbearia para AGENDAR */
-        #agendar-banner {
-            background: linear-gradient(to right, #2c2c2c, #5e5e5e);
-            background-image: url('images/barber_abstract_3d.jpg'); /* Nova imagem abstrata 3D */
-            background-size: cover;
-            background-position: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .banner-text {
-            background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente para legibilidade */
-            padding: 10px 20px;
+            color: white;
+            background-color: rgba(0, 123, 255, 0.8);
+            border: none;
             border-radius: 5px;
-            font-size: 1.5rem; /* Default font size for larger screens */
-            line-height: 1.2; /* Improve readability */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            overflow: hidden;
+            text-align: center;
+            text-decoration: none; /* Para consistência com links estilizados */
         }
-
-        /* Media query for screens smaller than 768px (tablets and mobile) */
-        @media (max-width: 768px) {
-            .banner {
-                width: 90%; /* Slightly wider on smaller screens */
-                height: 150px; /* Reduce height for better fit */
-                margin: 15px 0;
-            }
-
-            .banner-text {
-                font-size: 1.2rem; /* Smaller font size for mobile */
-                padding: 8px 15px; /* Adjust padding for smaller screens */
-            }
+        .button:hover {
+            background-color: rgba(0, 123, 255, 1);
+            transform: scale(1.05); /* Leve zoom de 5% */
         }
-
-        /* Media query for screens smaller than 480px (most mobile phones) */
-        @media (max-width: 480px) {
-            .banner {
-                width: 95%; /* Almost full width on very small screens */
-                height: 120px; /* Further reduce height */
-                margin: 10px 0;
-            }
-
-            .banner-text {
-                font-size: 1rem; /* Even smaller font size for very small screens */
-                padding: 6px 10px;
-            }
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            transition: 0.5s;
+        }
+        .button:hover::before {
+            left: 100%; /* Efeito de luz passando da esquerda para a direita */
+        }
+        #btn1 {
+            top: 550px;
+            left: 595px;
+        }
+        #btn2 {
+            top: 550px;
+            right: 530px;
+        }
+        #btn3 {
+            bottom: 125px;
+            left: 975px;
+        }
+        #btn4 {
+            bottom: 125px;
+            right: 135px;
+        }
+        .social-icons {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-size: cover;
+            transition: opacity 0.3s;
+        }
+        .social-icons a:hover {
+            opacity: 0.8;
+        }
+        .facebook {
+            background-image: url('https://img.icons8.com/color/48/000000/facebook-new.png');
+        }
+        .instagram {
+            background-image: url('https://img.icons8.com/color/48/000000/instagram-new.png');
+        }
+        .whatsapp {
+            background-image: url('https://img.icons8.com/color/48/000000/whatsapp.png');
         }
     </style>
 </head>
 <body>
-    <!-- Banner EDUK -->
-    <a href="https://www.eduk.skysee.com.br" target="_blank" class="banner" id="eduk-banner">
-        <div class="banner-text">EDUK - SISTEMA DE GESTÃO ESCOLAR</div>
-    </a>
-
-    <!-- Banner AGENDAR -->
-    <a href="https://www.agendar.skysee.com.br" target="_blank" class="banner" id="agendar-banner">
-        <div class="banner-text">AGENDAR - SISTEMA DE AGENDAMENTO E GESTÃO DE SERVIÇOS</div>
-    </a>
+    <img src="images/home.png" alt="Background" class="background-image">
+    <button class="button" id="btn1" onclick="window.open('https://www.eduk.skysee.com.br', '_blank')">Escolar</button>
+    <button class="button" id="btn2" onclick="window.open('https://www.agendar.skysee.com.br/sistema-para-barbearia.php', '_blank')">Barbearia</button>
+    <button class="button" id="btn3" onclick="window.open('https://www.agendar.skysee.com.br/sistema-para-salao-de-beleza.php', '_blank')">Salão<br>de Beleza</button>
+    <button class="button" id="btn4" onclick="window.open('https://www.agendar.skysee.com.br/sistema-para-clinica-de-estetica.php', '_blank')">Clinica<br>de Estética</button>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/profile.php?id=61574991107173" target="_blank" class="facebook"></a>
+        <a href="https://www.instagram.com/skysee.software/" target="_blank" class="instagram"></a>
+        <a href="https://wa.me/5522998838694" target="_blank" class="whatsapp"></a>
+    </div>
 </body>
 </html>
