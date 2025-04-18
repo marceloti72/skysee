@@ -307,6 +307,7 @@
         }
     </style>
 </head>
+
 <body>
     <?php 
     $ano_atual = date('Y');
