@@ -261,7 +261,7 @@
 
         @media screen and (max-width: 480px) {
             .button-container {
-                top: 60%;
+                top: 62%;
                 gap: 8px;
                 padding: 0 5px;
             }
