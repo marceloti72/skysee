@@ -47,11 +47,11 @@
             z-index: 1;
         }
         .image-button:hover img,
-        .image-button:active img {
+        .image-button.active img {
             filter: grayscale(0%);
         }
         .image-button:hover,
-        .image-button:active {
+        .image-button.active {
             transform: scale(1.05);
         }
         .image-button::before {
@@ -71,7 +71,7 @@
             z-index: 2;
         }
         .image-button:hover::before,
-        .image-button:active::before {
+        .image-button.active::before {
             left: 100%;
         }
         .image-button span {
@@ -92,7 +92,7 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
         }
         .image-button:hover span,
-        .image-button:active span {
+        .image-button.active span {
             opacity: 1;
         }
         .social-icons {
@@ -318,7 +318,6 @@
         <source media="(max-width: 768px)" srcset="images/Home2.png">
         <img src="images/Home2.png" alt="Descrição da imagem" class="background-image">
     </picture> 
-    <!-- <img src="images/home.png" alt="Imagem de fundo" class="background-image"> -->
     <div class="button-container">
         <a href="https://www.eduk.skysee.com.br" target="_blank" class="image-button" id="btn1">
             <img src="images/escolar-btn.png" alt="Botão Escolar">
@@ -362,7 +361,9 @@
             const cookieConsent = document.getElementById('cookie-consent');
             const acceptCookies = document.getElementById('accept-cookies');
             const declineCookies = document.getElementById('decline-cookies');
+            const buttons = document.querySelectorAll('.image-button');
 
+            // Controle do consentimento de cookies
             if (!localStorage.getItem('cookiesAccepted')) {
                 cookieConsent.classList.add('show');
             }
@@ -382,6 +383,44 @@
             declineCookies.addEventListener('click', () => {
                 localStorage.setItem('cookiesAccepted', 'false');
                 hideCookieConsent();
+            });
+
+            // Efeito temporizado nos botões
+            let currentIndex = 0;
+            let interval;
+
+            function activateButton(index) {
+                buttons.forEach((btn, i) => {
+                    if (i === index) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+
+            function startCycle() {
+                activateButton(currentIndex);
+                currentIndex = (currentIndex + 1) % buttons.length;
+                interval = setTimeout(startCycle, 2000); // 2 segundos por botão
+            }
+
+            // Inicia o ciclo
+            startCycle();
+
+            // Pausa o ciclo ao passar o mouse e retoma ao sair
+            buttons.forEach((button, index) => {
+                button.addEventListener('mouseenter', () => {
+                    clearTimeout(interval);
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                });
+
+                button.addEventListener('mouseleave', () => {
+                    button.classList.remove('active');
+                    currentIndex = index;
+                    startCycle();
+                });
             });
         });
     </script>
